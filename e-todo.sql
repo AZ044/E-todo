@@ -1,0 +1,45 @@
+-- initialize database
+CREATE DATABASE IF NOT EXISTS etodo;
+USE etodo;
+
+-- create user table
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL UNIQUE,
+    firstname VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    end_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    task_status INT DEFAULT 0
+);
+
+-- create lists table
+CREATE TABLE IF NOT EXISTS lists (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    end_date TIMESTAMP DEFAULT  CURRENT_TIMESTAMP,
+    task_status INT DEFAULT 0,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- create todo table
+CREATE TABLE IF NOT EXISTS todo(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    list_id INT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    status TINYINT(1) DEFAULT 0,
+    position INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    due_time TIMESTAMP,
+    task_status INT DEFAULT 0,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (list_id) REFERENCES lists(id) ON DELETE CASCADE
+);
