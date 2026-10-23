@@ -2,7 +2,7 @@
 
 ## Overview
 
-Etodo is a todo list app.
+ETodo is a full-stack todo list application: a React frontend, an Express REST API and a MariaDB database, with JWT authentication. Each user has their own private todo list. The whole stack can be started with Docker Compose.
 
 ## Features
 
@@ -16,32 +16,35 @@ Etodo is a todo list app.
 ## Project Structure
 
 ```
-B-WEB-101-NCE-1-1-etodo-4/
+E-todo/
 │
 ├── backend/
+│   ├── .env.example
 │   ├── Dockerfile
 │   ├── package.json
-│   └── src/
-│       ├── index.js
-│       ├── config/
-│       │   └── db.js
-│       ├── middleware/
-│       │   ├── auth.js
-│       │   └── errorHandler.js
-│       ├── routes/
-│       │   ├── auth/
-│       │   │   └── auth.js
-│       │   ├── todos/
-│       │   │   ├── todos.js
-│       │   │   └── todos.query.js
-│       │   └── user/
-│       │       ├── user.js
-│       │       └── user.query.js
-│       └── script/
+│   └── script/
+│       └── src/
+│           ├── index.js
+│           ├── config/
+│           │   └── db.js
+│           ├── middleware/
+│           │   ├── auth.js
+│           │   └── errorHandler.js
+│           └── routes/
+│               ├── auth/
+│               │   └── auth.js
+│               ├── todos/
+│               │   ├── todos.js
+│               │   └── todos.query.js
+│               └── user/
+│                   ├── user.js
+│                   └── user.query.js
 │
 ├── frontend/
+│   ├── .env.example
 │   ├── Dockerfile
 │   ├── package.json
+│   ├── public/
 │   └── src/
 │       ├── App.js
 │       ├── App.css
@@ -63,13 +66,19 @@ B-WEB-101-NCE-1-1-etodo-4/
 ### 1. Clone the Repository
 
 ```sh
-git clone https://github.com/EpitechBachelorPromo2028/B-WEB-101-NCE-1-1-etodo-4.git
+git clone https://github.com/AZ044/E-todo.git
 cd E-todo
 ```
 
 ### 2. Environment Variables
 
-Create environment variable files as needed for backend and frontend.
+Copy the example files and adapt them:
+
+```sh
+cp backend/.env.example backend/.env
+cp frontend/.env.example frontend/.env
+```
+
 #### Backend example (`backend/.env`):
 ```
 DB_HOST=database
@@ -79,6 +88,9 @@ DB_NAME=etodo
 JWT_SECRET=jwt_token
 ```
 
+> Use `DB_HOST=database` with Docker Compose (the name of the database service), or `localhost` when running without Docker.
+> Always replace `JWT_SECRET` and `DB_PASSWORD` with your own secret values.
+
 #### Frontend example (`frontend/.env`):
 ```
 REACT_APP_API_URL=http://localhost:3001
@@ -86,7 +98,7 @@ REACT_APP_API_URL=http://localhost:3001
 
 ### 3. Database Setup
 
-- The `e-todo.sql` file contains the schema for the MARIADB database.
+- The `e-todo.sql` file contains the schema for the MariaDB database.
 - Docker Compose will automatically set up the database container.
 
 ### 4. Running with Docker Compose
@@ -130,8 +142,8 @@ npm start
 - `GET /api/user/profile` — Get user profile
 
 ## Technologies Used
-- **Backend:** Node.js, Express, MARIADB, JWT
-- **Frontend:** React, JavaScript, CSS, AntDesign
+- **Backend:** Node.js, Express, MariaDB, JWT
+- **Frontend:** React, JavaScript, CSS, Ant Design
 - **DevOps:** Docker, Docker Compose
 
 ## Authors
