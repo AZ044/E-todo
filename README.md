@@ -64,7 +64,7 @@ B-WEB-101-NCE-1-1-etodo-4/
 
 ```sh
 git clone https://github.com/EpitechBachelorPromo2028/B-WEB-101-NCE-1-1-etodo-4.git
-cd B-WEB-101-NCE-1-1-etodo-4
+cd E-todo
 ```
 
 ### 2. Environment Variables
